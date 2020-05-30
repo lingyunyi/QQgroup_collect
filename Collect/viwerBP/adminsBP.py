@@ -1,3 +1,16 @@
+from django.http import request
+from django.shortcuts import redirect,render,HttpResponse,Http404
+import threading,requests
+import uuid,time,os
+import logging,hashlib,json
+from Collect.tools import manager_sql
+
+
+manager_sqlx = manager_sql.SqlManger()
+
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s  - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
 def activity_manager_add(request):
     '''
 
@@ -72,8 +85,31 @@ def activity_manager_add(request):
                 return HttpResponse("404")
             # ----------------------POST请求可以返回内容的开始---------------------------
             # ----------------------POST请求可以返回内容的开始---------------------------
-
-
+            active_name = request.POST.get("active_name",None)
+            active_content = request.POST.get("active_content", None)
+            active_type = request.POST.get("active_type", None)
+            active_end_time = request.POST.get("active_end_time", None)
+            #如果为空直接，返回404
+            if active_name == None or active_name =="" or active_content == None or active_content =="" or active_type == None or active_type == "":
+                return HttpResponse("404")
+            if active_end_time == None or active_end_time == "":
+                return HttpResponse("404")
+            # 这里输入的值都不为空，可以进行数据插入
+            sql = '''insert into alls_notice_activity_list values (%s,%s,%s,%s,%s,%s,%s,%s)'''
+            insert_result = manager_sqlx.excute(sql,[
+                "",
+                active_name,
+                active_content,
+                active_type,
+                time.strftime('%Y-%m-%d',time.localtime(time.time())),
+                active_end_time,
+                user_name,
+                0
+            ])
+            if insert_result == True:
+                return HttpResponse("200")
+            else:
+                return HttpResponse("404")
             # ----------------------POST请求可以返回内容的开始---------------------------
             # ----------------------POST请求可以返回内容的开始---------------------------
         except BaseException as e :

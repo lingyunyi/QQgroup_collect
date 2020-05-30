@@ -100,13 +100,15 @@
         </dt>
         <dd class="am-accordion-bd am-collapse am-in">
             <!-- 规避 Collapase 处理有 padding 的折叠内容计算计算有误问题， 加一个容器 -->
-            <div class="am-accordion-content">
-                {% for row in activity_list %}
+
+            {% for row in activity_list %}
+                <div class="am-accordion-content">
                     <br/>主题：{{ row.1 }}
                     <br/>内容：{{ row.2 }}
                     <br/>创建时间：{{ row.4 }}
-                {% endfor %}
-            </div>
+                </div>
+            {% endfor %}
+
         </dd>
     </dl>
 </section>

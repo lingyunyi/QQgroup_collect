@@ -39,19 +39,21 @@
                     if (data == "404") {
                         location.href = "/admins/login/"
                     }
-                    if (data != ""){
+                    if (data != "") {
                         var obj2 = JSON.parse(data);
                         var tab = $("#tbody");
                         tab.empty();
-                        for(var key in obj2){
-                            var str = "<tr>"+"<td>" + obj2[key][0] + "</td>"+"<td>" + obj2[key][1] + "</td>"+"<td>" + obj2[key][2] + "</td>"+ "<td>" + obj2[key][5] + "</td>"+"<td>" + obj2[key][3] + "</td>"
+                        for (var key in obj2) {
+                            var str = "<tr>" + "<td>" + obj2[key][0] + "</td>" + "<td>" + obj2[key][1] + "</td>" + "<td>" + obj2[key][2] + "</td>" + "<td>" + obj2[key][5] + "</td>" + "<td>" + obj2[key][3] + "</td>"
                             var str2 = "<td><a href='/admins/download/?file=" + obj2[key][2] + "'><span class=\"glyphicon glyphicon-download-alt\" aria-hidden=\"true\"></span></a></td></tr>"
-                            if (obj2[key][4] == "like"){
-                                tab.append(str+"<td><span class=\"glyphicon glyphicon-heart\" aria-hidden=\"true\" style=\"color: red\"></span> </td>"+str2);
-                            }else{
-                                tab.append(str+"<td> <span class=\"glyphicon glyphicon-heart\" aria-hidden=\"true\"style=\"color: black\"></span> </td>"+str2);
-                            };
-                        };
+                            if (obj2[key][4] == "like") {
+                                tab.append(str + "<td><span class=\"glyphicon glyphicon-heart\" aria-hidden=\"true\" style=\"color: red\"></span> </td>" + str2);
+                            } else {
+                                tab.append(str + "<td> <span class=\"glyphicon glyphicon-heart\" aria-hidden=\"true\"style=\"color: black\"></span> </td>" + str2);
+                            }
+                            ;
+                        }
+                        ;
                     }
                 },
                 //调用出错执行的函数
@@ -103,6 +105,7 @@
         <li class="active"><a href="/admins/users_disk_manager/"><span
                 class="glyphicon glyphicon-tree-deciduous"></span>网盘管理系统</a></li>
         <li><a href="/admins/activity_manager/"><span class="glyphicon glyphicon-tree-deciduous"></span>活动管理系统</a></li>
+        <li><a href="/admins/activity_manager_add/"><span class="glyphicon glyphicon-tree-deciduous"></span>活动发布系统</a></li>
         <li role="presentation" class="divider"></li>
     </ul>
 </div><!--/.sidebar-->
@@ -144,7 +147,7 @@
                                 <th style="text-align: center">下载地址</th>
                             </tr>
                             </thead>
-                            <tbody id = "tbody">
+                            <tbody id="tbody">
 
                             </tbody>
                         </table>

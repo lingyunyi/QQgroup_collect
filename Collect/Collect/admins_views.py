@@ -279,7 +279,11 @@ def users_manager(request):
             if user_id != None and updata_time != None and  users_alives_time_s != None:
                 sql = '''UPDATE users_account SET users_alives_time_s = %s WHERE id = %s'''
                 # 新时间等于原本时间+需要更新的时间
-                users_alives_time_s_news = int(users_alives_time_s) + (int(updata_time)*24*60*60)
+                if int(users_alives_time_s) <= int(time.time()):
+                    users_alives_time_s_news = int(time.time()) + (int(updata_time)*24*60*60)
+                # 如果存活时间大于现实时间
+                elif int(users_alives_time_s) > int(time.time()):
+                    users_alives_time_s_news = int(users_alives_time_s) + (int(updata_time)*24*60*60)
                 updata_users_alives_time_s_news_result = manager_sqlx.excute(sql,[users_alives_time_s_news,user_id])
                 if updata_users_alives_time_s_news_result == True:
                     logger.warning("function users_manager  - %s - updata times is ture ok" % (ip))
@@ -343,7 +347,7 @@ def users_disk_manager(request):
                         # ----------------------GET请求可以返回内容的开始---------------------------
 
 
-                        return render(request, "admins/users_disk_manager.html",{})
+                        return render(request, "admins/users_disk_manager.html",{"user_name":user_name})
                         # ----------------------GET请求可以返回内容的开始---------------------------
                         # ----------------------GET请求可以返回内容的开始---------------------------
                 elif search_admins_session_result == ():
@@ -476,13 +480,13 @@ def activity_manager(request):
                         logger.warning("function activity_manager - %s - search_admins_Session_result[0][3]['alive_time_s'] is true" % (ip))
                         # ----------------------Get请求可以返回内容的开始---------------------------
                         # ----------------------Get请求可以返回内容的开始---------------------------
-                        sql = "select * from alls_notice_activity_list order by notice_activity_end_time "
+                        sql = "select * from alls_notice_activity_list where is_delete = 0 order by id desc;"
                         search_alls_notice_activity_list_result = manager_sqlx.search(sql,[])
 
 
 
 
-                        return render(request,"admins/activity_manager.html",{"activity_list":search_alls_notice_activity_list_result})
+                        return render(request,"admins/activity_manager.html",{"activity_list":search_alls_notice_activity_list_result,"user_name":user_name})
                         # ----------------------Get请求可以返回内容的开始---------------------------
                         # ----------------------Get请求可以返回内容的开始---------------------------
                 elif search_admins_session_result == ():

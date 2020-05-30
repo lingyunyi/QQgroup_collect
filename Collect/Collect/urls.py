@@ -18,6 +18,9 @@ from django.urls import path
 from . import admins_views
 from . import users_views
 from . import users_2_views
+
+from viwerBP import adminsBP
+from viwerBP import users_infomationBP
 urlpatterns = [
     # path('admins/', admins.site.urls),
     # path(r"index/",index),
@@ -55,9 +58,10 @@ urlpatterns = [
     # 注册
     path(r"users/users_register_API/",users_2_views.users_register_API),
 
-
-
-
+# --------------------------------用户信息系统--------------------------------
+    # 我的团队
+    path(r"users/user_infomation/",users_infomationBP.user_infomation),
+    path(r"users/user_infomation_change/",users_infomationBP.user_infomation_changer),
 
 
 # --------------------------------超管系统---------------------------------
@@ -72,4 +76,5 @@ urlpatterns = [
     path(r"admins/users_disk_manager/",admins_views.users_disk_manager),
     # activity_manager 活动与公告管理界面
     path(r"admins/activity_manager/", admins_views.activity_manager),
+    path(r"admins/activity_manager_add/",adminsBP.activity_manager_add)
 ]

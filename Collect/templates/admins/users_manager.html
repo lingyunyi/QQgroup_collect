@@ -53,6 +53,7 @@
                 class="glyphicon glyphicon-tree-deciduous"></span>用户管理系统</a></li>
         <li><a href="/admins/users_disk_manager/"><span class="glyphicon glyphicon-tree-deciduous"></span>网盘管理系统</a></li>
         <li><a href="/admins/activity_manager/"><span class="glyphicon glyphicon-tree-deciduous"></span>活动管理系统</a></li>
+        <li><a href="/admins/activity_manager_add/"><span class="glyphicon glyphicon-tree-deciduous"></span>活动发布系统</a></li>
         <li role="presentation" class="divider"></li>
     </ul>
 </div><!--/.sidebar-->
@@ -152,8 +153,8 @@
             type: "POST",
             data: {
                 "user_id": idx,
-                "updata_time": $("#updata_time_"+idx).val(),
-                "users_alives_time_s": $("#users_alives_time_s_"+idx).val(),
+                "updata_time": $("#updata_time_" + idx).val(),
+                "users_alives_time_s": $("#users_alives_time_s_" + idx).val(),
             },
             // 设置超时的时间XXs
             timeout: 30000,
