@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>个人中心</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <link rel="alternate icon" type="image/png" href="../../static/users/assets/i/favicon.png">
+    <link rel="stylesheet" href="../../static/users/assets/css/amazeui.min.css"/>
+    <style>
+        @media only screen and (min-width: 1200px) {
+            .blog-g-fixed {
+                max-width: 1200px;
+            }
+        }
+
+        @media only screen and (min-width: 641px) {
+            .blog-sidebar {
+                font-size: 1.4rem;
+            }
+        }
+
+        .blog-main {
+            padding: 20px 0;
+        }
+
+        .blog-title {
+            margin: 10px 0 20px 0;
+        }
+
+        .blog-meta {
+            font-size: 14px;
+            margin: 10px 0 20px 0;
+            color: #222;
+        }
+
+        .blog-meta a {
+            color: #27ae60;
+        }
+
+        .blog-pagination a {
+            font-size: 1.4rem;
+        }
+
+        .blog-team li {
+            padding: 4px;
+        }
+
+        .blog-team img {
+            margin-bottom: 0;
+        }
+
+        .blog-content img,
+        .blog-team img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .blog-footer {
+            padding: 10px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<br>
+<div class="am-g">
+    <div class="am-u-sm-2">
+        <img class="am-circle" src="http://amazeui.shopxo.net/static/images/100.jpg" width="50" height="50"/>
+    </div>
+    <div class="am-u-sm-10"><h4 style="
+    margin-top: 0px; margin-bottom: 0px;
+">{{ user_name }}</h4>
+
+        <h4 style="
+    margin-top: 0px;">志愿者团队</h4>
+    </div>
+
+</div>
+<div class="am-g">
+    <div class="am-u-sm-3">
+        <center><span class="am-icon-btn am-success am-icon-user-secret am-icon-sm"></span>
+            <P style="margin-top: 0px;
+">基本信息</P></center>
+    </div>
+    <a href="/users/join_activity/"><div class="am-u-sm-3">
+        <center><span class="am-icon-btn am-success am-icon-houzz am-icon-sm"></span>
+            <P style="margin-top: 0px;
+">参加活动</P></center>
+    </div></a>
+    <a href="/users/users_announce/">
+        <div class="am-u-sm-3">
+            <center><span class="am-icon-btn am-success am-icon-institution am-icon-sm"></span>
+                <P style="margin-top: 0px;">团队</P></center>
+        </div></a>
+    <a href="/users/control/"><div class="am-u-sm-3">
+        <center><span class="am-icon-btn am-success am-icon-home am-icon-sm"></span>
+            <P style="margin-top: 0px;
+">控制室</P></center>
+    </div></a>
+</div>
+<div class="am-g">
+    <div class="am-u-sm-6">
+        <div class="am-panel am-panel-default">
+            <div class="am-panel-bd">进入正在进行的活动</div>
+        </div>
+    </div>
+    <div class="am-u-sm-6">
+        <div class="am-panel am-panel-default">
+            <div class="am-panel-bd">团队公告</div>
+        </div>
+    </div>
+</div>
+
+<div class="am-panel am-panel-default">
+    <P style="
+    margin-top: 10px;
+    margin-left: 20px;
+">我的服务</P>
+    <div class="am-panel-bd">
+        <div class="am-g">
+            <div class="am-u-sm-3">
+                <center><span class="am-icon-home am-icon-lg"></span>
+                    <P style="margin-top: 0px;
+">已报名活动</P></center>
+            </div>
+            <div class="am-u-sm-3">
+                <center><span class="am-icon-home am-icon-lg"></span>
+                    <P style="margin-top: 0px;
+">签到</P></center>
+            </div>
+            <div class="am-u-sm-3">
+                <center><span class="am-icon-home am-icon-lg"></span>
+                    <P style="margin-top: 0px;
+">已加入组织</P></center>
+            </div>
+            <div class="am-u-sm-3">
+                <center><span class="am-icon-home am-icon-lg"></span>
+                    <P style="margin-top: 0px;
+">我的评论</P></center>
+            </div>
+        </div>
+    </div>
+    <div class="am-g">
+        <div class="am-u-sm-3">
+            <center><span class="am-icon-home am-icon-lg"></span>
+                <P style="margin-top: 0px;
+">已发布文章</P></center>
+        </div>
+        <div class="am-u-sm-3">
+            <center><span class="am-icon-home am-icon-lg am-success"></span>
+                <P style="margin-top: 0px;
+">帮助中心</P></center>
+        </div>
+        <div class="am-u-sm-3">
+            <center><span class="am-icon-home am-icon-lg"></span>
+                <P style="margin-top: 0px;
+">审核区</P></center>
+        </div>
+        <div class="am-u-sm-3">
+            <center><span class="am-icon-home am-icon-lg"></span>
+                <P style="margin-top: 0px;
+">任务区</P></center>
+        </div>
+    </div>
+</div>
+<div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default "
+     id="">
+    <ul class="am-navbar-nav am-cf am-avg-sm-4">
+            <li>
+                <a href="/users/join_activity/">
+                    <span class="am-icon-btn  am-success am-icon-houzz am-icon-sm"></span>
+                    <span class="am-navbar-label ">参加活动</span>
+                </a>
+            </li>
+            <li>
+                <a href="/users/users_my_team/">
+                    <span class=" am-icon-laptop am-icon-sm"></span>
+                    <span class="am-navbar-label">公示记录</span>
+                </a>
+            </li>
+            <li>
+                <a href="/users/users_announce/">
+                    <span class=" am-icon-institution  am-icon-sm"></span>
+                    <span class="am-navbar-label">我的团队</span>
+                </a>
+            </li>
+            <li>
+                <a href="/users/center/">
+                    <span class=" am-icon-user-secret  am-icon-sm"></span>
+                    <span class="am-navbar-label">个人中心</span>
+                </a>
+            </li>
+        </ul>
+</div>
+
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="../../static/users/assets/js/amazeui.ie8polyfill.min.js"></script>
+<script src="../../static/users/assets/js/amazeui.min.js"></script>
+
+</body>
+</html>

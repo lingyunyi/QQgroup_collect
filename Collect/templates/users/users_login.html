@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>红遍中国志愿者</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <link rel="alternate icon" type="image/png" href="../../static/users/assets/i/favicon.png">
+    <link rel="stylesheet" href="../../static/users/assets/css/amazeui.min.css"/>
+    <style>
+        .header {
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 200%;
+            color: #333;
+            margin-top: 30px;
+        }
+
+        .header p {
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <div class="am-g">
+        <h1>红遍中国志愿者</h1>
+        <p>Unity, friendship, helping others and selfless dedication<br/>团结友爱，助人为乐，无私奉献</p>
+    </div>
+    <hr/>
+</div>
+<div class="am-g">
+    <div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
+
+        <br>
+        <br>
+
+        <section class="am-form" id="login_form">
+            <label for="text">手机:</label>
+            <input type="text" name="" id="users_account" value="">
+            <br>
+            <label for="password">密码:</label>
+            <input type="password" name="" id="users_passwd" value="">
+            <br>
+            <a href="/users/users_register/">忘记密码</A>
+            <br>
+            <br>
+            <div class="am-cf">
+                <button type="button" class="am-btn am-btn-primary  am-round am-fl " onclick="AjaxSend('login_form');">登
+                    陆
+                </button>
+                <a href="/users/users_register/">
+                    <button type="button" class="am-btn am-btn-primary  am-round am-fr">注 册</button>
+                </a>
+            </div>
+        </section>
+        <hr>
+    </div>
+</div>
+<script>
+
+    function Cmd(id_name) {
+        var ipt = document.getElementById(id_name).getElementsByTagName("input"); //查找divbox这个div里的所有文本框
+        for (var i = 0; i < ipt.length; i++) { //循环
+            if (ipt[i].value.length == 0) { //如果其中一个文本框没有填写
+                alert("所有文本框不能为空"); //弹出提示
+                ipt[i].focus(); //定位到没有填写的文本框
+                return false; //返回false
+            }
+        }
+        return true; //都已经填写，返回true
+    }
+
+    function AjaxSend(id_name) {
+        var res = Cmd(id_name)
+        if (res == true) {
+            $.ajax({
+                url: '/users/login/',
+                type: "POST",
+                data: {
+                    "users_account": $("#users_account").val(),
+                    "users_passwd": $("#users_passwd").val(),
+                },
+                // 设置超时的时间XXs
+                timeout: 30000,
+                success: function (data) {
+                    //当服务端处理完成后，返回数据时，该函数自动调用
+                    // data代表服务器给我们返回的值
+                    // 可以使用 JavaScript进行html的内容修改展示内容，或者刷新界面
+                    console.log(data)
+                    // 登入成功
+                    if (data == "200") {
+                        location.href = "/users/center/"
+                    }
+                    ;
+                    // 失败
+                    if (data == "404") {
+                        alert("账号不存在"); //弹出提示
+                    }
+                    ;
+                    if (data == "303") {
+                        alert("账号或密码错误"); //弹出提示
+                    }
+                    if (data == "505") {
+                        alert("请重试......"); //弹出提示
+                    }
+                },
+                //调用出错执行的函数
+                error: function () {
+                    //请求出错处理
+                    console.log("error");
+                }
+            })
+        }
+    }
+</script>
+<script src="../../static/admins/js/jquery-1.11.1.min.js"></script>
+</body>
+</html>

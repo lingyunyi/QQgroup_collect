@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Login Page | Amaze UI Example</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="alternate icon" type="image/png" href="../../static/users/assets/i/favicon.png">
+    <link rel="stylesheet" href="../../static/users/assets/css/amazeui.min.css"/>
+    <script src="../../static/admins/js/jquery-1.11.1.min.js"></script>
+    <style>
+        .header {
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 200%;
+            color: #333;
+            margin-top: 30px;
+        }
+
+        .header p {
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <div class="am-g">
+        <h1>红遍中国志愿者</h1>
+        <p>Unity, friendship, helping others and selfless dedication<br/>团结友爱，助人为乐，无私奉献</p>
+    </div>
+    <hr/>
+</div>
+<div class="am-g">
+    <div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
+
+        <br>
+        <br>
+
+        <section method="post" class="am-form" data-am-validator id="section">
+
+            <label for="text">手机:</label>
+            <input type="text" maxlength="11" name="" id="users_phone" value="">
+            <br>
+
+            <label for="text">验证码:</label>
+            <div class="am-g">
+                <div class="am-u-sm-7"><input type="text" name="" id="users_random_num" value="" maxlength="4"></div>
+                <div class="am-u-sm-5">
+                    <button type="button" class="am-btn am-btn-primary" id="send_numbers">发送验证码</button>
+                </div>
+            </div>
+            <br>
+
+            <div class="am-form-group">
+                <label for="doc-vld-pwd-1">密码：</label>
+                <input type="password" id="doc-vld-pwd-1" minlength="6" maxlength="11" placeholder="至少六位密码"/>
+            </div>
+
+            <div class="am-form-group">
+                <label for="doc-vld-pwd-2">确认密码：</label>
+                <input type="password" id="doc-vld-pwd-2" minlength="6" maxlength="11" placeholder="请与上面输入的值一致"/>
+            </div>
+
+            <br>
+            <button type="button" class="am-btn am-btn-primary  am-round am-center " onclick="AjaxSend('section');">注 册</button>
+        </section>
+        <hr>
+    </div>
+</div>
+</body>
+</html>
+<script>
+
+    function Cmd(id_name) {
+        var ipt = document.getElementById(id_name).getElementsByTagName("input"); //查找divbox这个div里的所有文本框
+        for (var i = 0; i < ipt.length; i++) { //循环
+            if (ipt[i].value.length == 0) { //如果其中一个文本框没有填写
+                alert("所有文本框不能为空"); //弹出提示
+                ipt[i].focus(); //定位到没有填写的文本框
+                return false; //返回false
+            }
+        }
+        return true; //都已经填写，返回true
+    }
+
+    function Phone_AjaxSend() {
+        var regBox = {
+            regEmail: /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/,   //....邮箱
+            regName: /^[a-z0-9_-]{3,16}$/,                       //....用户名
+            regMobile: /^0?1[3|4|5|8][0-9]\d{8}$/,                 //....手机
+            regTel: /^0[\d]{2,3}-[\d]{7,8}$/                     //....电话
+        }
+        var phone = $("#users_phone").val()
+        var result = regBox.regMobile.test(phone);
+        if (!result) {
+            $("#users_random_num").val("您输入的手机号码有误")
+            return false
+        } else {
+            $("#users_random_num").val("")
+            $.ajax({
+                url: '/users/users_register_API/',
+                type: "POST",
+                data: {
+                    "type":"send",
+                    "users_phone": $("#users_phone").val(),
+                },
+                // 设置超时的时间XXs
+                timeout: 30000,
+                success: function (data) {
+                    //当服务端处理完成后，返回数据时，该函数自动调用
+                    // data代表服务器给我们返回的值
+                    // 可以使用 JavaScript进行html的内容修改展示内容，或者刷新界面
+                    console.log(data)
+                    // 登入成功
+                    if(data == "505"){
+                        alert("请重试");
+                    }
+                },
+                //调用出错执行的函数
+                error: function () {
+                    //请求出错处理
+                    console.log("error");
+                }
+            })
+            return true;
+        }
+    }
+
+
+    function AjaxSend(id_name) {
+        var res = Cmd(id_name)
+        var one = $("#doc-vld-pwd-1").val()
+        var two = $("#doc-vld-pwd-2").val()
+        if(one != two){
+            alert("两次密码不匹配，请重新输入");
+            $("#doc-vld-pwd-1").val("")
+            $("#doc-vld-pwd-2").val("")
+            return false
+        }
+        if (res == true) {
+            $.ajax({
+                url: '/users/users_register_API/',
+                type: "POST",
+                data: {
+                    "type":"register",
+                    "users_phone": $("#users_phone").val(),
+                    "users_passwd": $("#doc-vld-pwd-2").val(),
+                    "users_random_num": $("#users_random_num").val(),
+                },
+                // 设置超时的时间XXs
+                timeout: 30000,
+                success: function (data) {
+                    //当服务端处理完成后，返回数据时，该函数自动调用
+                    // data代表服务器给我们返回的值
+                    // 可以使用 JavaScript进行html的内容修改展示内容，或者刷新界面
+                    console.log(data)
+                    // 登入成功
+                    if (data == "200") {
+                        location.href = "/users/login/"
+                    };
+                    // 失败
+                    if (data == "404") {
+                        alert("请重试"); //弹出提示
+                        location.reload();
+                    }
+                    if (data == "505") {
+                        $("#users_random_num").val("验证码错误，请重新输入")
+                    }
+                },
+                //调用出错执行的函数
+                error: function () {
+                    //请求出错处理
+                    console.log("error");
+                }
+            })
+        }
+    }
+
+    var wait = 60;
+    document.getElementById("send_numbers").onclick = function () {
+        var result = Phone_AjaxSend()
+        if(result != false){
+            time(this);
+        }
+    }
+
+    function time(o) {
+        if (wait == 0) {
+            o.removeAttribute("disabled");
+            o.innerHTML = "获取验证码";
+            wait = 60;
+        } else {
+            o.setAttribute("disabled", true);
+            o.innerHTML = wait + "秒重新发送";
+            wait--;
+            setTimeout(function () {
+                time(o)
+            }, 1000)
+        }
+
+    }
+
+</script>

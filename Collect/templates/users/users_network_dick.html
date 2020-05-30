@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>个人网盘</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <link rel="alternate icon" type="image/png" href="../../static/users/assets/i/favicon.png">
+    <link rel="stylesheet" href="../../static/users/assets/css/amazeui.min.css"/>
+    <style>
+        @media only screen and (min-width: 1200px) {
+            .blog-g-fixed {
+                max-width: 1200px;
+            }
+        }
+
+        @media only screen and (min-width: 641px) {
+            .blog-sidebar {
+                font-size: 1.4rem;
+            }
+        }
+
+        .blog-main {
+            padding: 20px 0;
+        }
+
+        .blog-title {
+            margin: 10px 0 20px 0;
+        }
+
+        .blog-meta {
+            font-size: 14px;
+            margin: 10px 0 20px 0;
+            color: #222;
+        }
+
+        .blog-meta a {
+            color: #27ae60;
+        }
+
+        .blog-pagination a {
+            font-size: 1.4rem;
+        }
+
+        .blog-team li {
+            padding: 4px;
+        }
+
+        .blog-team img {
+            margin-bottom: 0;
+        }
+
+        .blog-content img,
+        .blog-team img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .blog-footer {
+            padding: 10px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<header data-am-widget="header"
+        class="am-header am-header-default">
+    <div class="am-header-left am-header-nav">
+        <a href="/users/center/">
+            <img class="am-header-icon-custom"
+                 src="data:image/svg+xml;charset=utf-8,&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 12 20&quot;&gt;&lt;path d=&quot;M10,0l2,2l-8,8l8,8l-2,2L0,10L10,0z&quot; fill=&quot;%23fff&quot;/&gt;&lt;/svg&gt;"
+                 alt=""/>
+        </a>
+    </div>
+    <h1 class="am-header-title">
+        <P>网盘</P>
+    </h1>
+
+    <div class="am-header-right am-header-nav">
+        <a href="#right-link">
+            <img class="am-header-icon-custom"
+                 src="data:image/svg+xml;charset=utf-8,&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 42 26&quot; fill=&quot;%23fff&quot;&gt;&lt;rect width=&quot;4&quot; height=&quot;4&quot;/&gt;&lt;rect x=&quot;8&quot; y=&quot;1&quot; width=&quot;34&quot; height=&quot;2&quot;/&gt;&lt;rect y=&quot;11&quot; width=&quot;4&quot; height=&quot;4&quot;/&gt;&lt;rect x=&quot;8&quot; y=&quot;12&quot; width=&quot;34&quot; height=&quot;2&quot;/&gt;&lt;rect y=&quot;22&quot; width=&quot;4&quot; height=&quot;4&quot;/&gt;&lt;rect x=&quot;8&quot; y=&quot;23&quot; width=&quot;34&quot; height=&quot;2&quot;/&gt;&lt;/svg&gt;"
+                 alt=""/>
+        </a>
+    </div>
+</header>
+
+
+<div class="am-tabs" data-am-tabs>
+    <ul class="am-tabs-nav am-nav am-nav-tabs">
+
+        <li class="am-active"><a href="#tab1">网盘</a></li>
+        <li><a href="#tab2">收藏</a></li>
+        <li><a href="#tab3">账号信息</a></li>
+        <li><a href="#tab4">帮助</a></li>
+
+    </ul>
+
+    <div class="am-tabs-bd">
+        <div class="am-tab-panel am-fade am-in am-active" id="tab1">
+
+
+            <div class="am-panel-group" id="accordion">
+
+
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{parent: '#accordion', target: '#do-not-say-2'}">
+                            <SMALL> 完成率：{{ success_half }} - - 使用状态：{{ scan_status }}</SMALL>
+                        </h4>
+                    </div>
+                    <div id="do-not-say-2" class="am-panel-collapse am-collapse">
+                        <div class="am-panel-bd">
+
+
+                            <table class="am-table" style="margin-bottom: 0px;">
+                                <thead>
+                                <tr>
+                                    <th>
+                                        <CENTER>群号</CENTER>
+                                    </th>
+                                    <th>
+                                        <CENTER>群名称</CENTER>
+                                    </th>
+                                    <th>
+                                        <CENTER>群人数</CENTER>
+                                    </th>
+                                    <th>
+                                        <CENTER>操作</CENTER>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for row in all_uses_network_list %}
+                                    <tr>
+                                        <td>
+                                            <center>{{ row.2 }}</center>
+                                        </td>
+                                        <td>
+                                            <center>{{ row.1 }}</center>
+                                        </td>
+                                        <td>
+                                            <center>{{ row.5 }}</center>
+                                        </td>
+                                        <td>
+                                            <center>
+                                                <a class="am-icon-cog"
+                                                   data-am-modal="{target: '#my-actions1-{{ row.0 }}'}">
+                                                </a>
+                                            </center>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="am-tab-panel am-fade" id="tab2">
+            <table class="am-table">
+                <thead>
+                <tr>
+                    <th style="text-align: center;">群号</th>
+                    <th style="text-align: center;">群名称</th>
+                    <th style="text-align: center;">人数</th>
+                    <th style="text-align: center;">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for row in like_uses_network_list %}
+                    <tr>
+                        <td>
+                            <center>{{ row.2 }}</center>
+                        </td>
+                        <td>
+                            <center>{{ row.1 }}</center>
+                        </td>
+                        <td>
+                            <center>{{ row.5 }}</center>
+                        </td>
+                        <td>
+                            <center>
+                                <a class="am-icon-cog"
+                                   data-am-modal="{target: '#my-actions2-{{ row.0 }}'}">
+                                </a>
+                            </center>
+                        </td>
+                    </tr>
+                {% endfor %}
+
+
+                </tbody>
+            </table>
+        </div>
+        <div class="am-tab-panel am-fade" id="tab3">
+            <ul class="am-list">
+                <li><a href="#"></a>手机号：{{ user_name }}</li>
+                <li><a href="#"></a>使用剩余时间：<b>{{ user_alive_time_h }}</b>/小时</li>
+
+            </ul>
+        </div>
+
+        <div class="am-tab-panel am-fade" id="tab4">
+            .........
+
+
+            </ul>
+        </div>
+
+
+    </div>
+</div>
+<!--网盘-操作-点击按钮，id="my-actions1"为容器ID-->
+{% for row in all_uses_network_list %}
+    <div class="am-modal-actions" id="my-actions1-{{ row.0 }}">
+        <div class="am-modal-actions-group">
+
+            <ul class="am-list">
+                <li><a onclick="AjaxSend({{ row.0 }},'add');"><i class=" am-icon-star"></i>收藏</a></li>
+                <li><a href="/users/download/?file={{ row.2 }}"><i class="am-icon-download "></i>下载</a></li>
+            </ul>
+        </div>
+        <div class="am-modal-actions-group">
+            <button class="am-btn am-btn-secondary am-btn-block" data-am-modal-close>取消</button>
+        </div>
+    </div>
+{% endfor %}
+
+<!--收藏-操作-点击按钮，id="my-actions2"为容器ID-->
+{% for row in like_uses_network_list %}
+    <div class="am-modal-actions" id="my-actions2-{{ row.0 }}">
+        <div class="am-modal-actions-group">
+            <ul class="am-list">
+                <li><a onclick="AjaxSend({{ row.0 }},'pop');"><i class=" am-icon-star"></i>移除收藏</a></li>
+                <li><a href="/users/download/?file={{ row.2 }}"><i class="am-icon-download "></i>下载</a></li>
+            </ul>
+        </div>
+        <div class="am-modal-actions-group">
+            <button class="am-btn am-btn-secondary am-btn-block" data-am-modal-close>取消</button>
+        </div>
+    </div>
+{% endfor %}
+<!--修改备注data-am-modal="{target: '#my-alert'}"-->
+<div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">添加备注</div>
+        <div class="am-modal-bd" style="
+    border-top-width: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: 61px;
+">
+            <!--placeholder=""引用原群名称-->
+            <p><input type="text" class="am-form-field am-round" placeholder="XXXXX交流群"/></p>
+        </div>
+        <div class="am-modal-footer">
+            <span class="am-modal-btn">确定</span>
+            <span class="am-modal-btn">取消</span>
+        </div>
+    </div>
+</div>
+
+
+<div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default "
+     id="">
+    <ul class="am-navbar-nav am-cf am-avg-sm-4">
+            <li>
+                <a href="/users/join_activity/">
+                    <span class="am-icon-btn  am-success am-icon-houzz am-icon-sm"></span>
+                    <span class="am-navbar-label ">参加活动</span>
+                </a>
+            </li>
+            <li>
+                <a href="/users/users_my_team/">
+                    <span class=" am-icon-laptop am-icon-sm"></span>
+                    <span class="am-navbar-label">公示记录</span>
+                </a>
+            </li>
+            <li>
+                <a href="/users/users_announce/">
+                    <span class=" am-icon-institution  am-icon-sm"></span>
+                    <span class="am-navbar-label">我的团队</span>
+                </a>
+            </li>
+            <li>
+                <a href="/users/center/">
+                    <span class=" am-icon-user-secret  am-icon-sm"></span>
+                    <span class="am-navbar-label">个人中心</span>
+                </a>
+            </li>
+        </ul>
+</div>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="../../static/users/assets/js/amazeui.ie8polyfill.min.js"></script>
+<script src="../../static/users/assets/js/jquery.min.js"></script>
+<script src="../../static/users/assets/js/amazeui.min.js"></script>
+<script>
+    function AjaxSend(id, action) {
+        $.ajax({
+            url: '/users/users_network_dick/',
+            type: "POST",
+            data: {
+                "dick_id": id,
+                "action": action
+            },
+            // 设置超时的时间XXs
+            timeout: 30000,
+            success: function (data) {
+                //当服务端处理完成后，返回数据时，该函数自动调用
+                // data代表服务器给我们返回的值
+                // 可以使用 JavaScript进行html的内容修改展示内容，或者刷新界面
+                console.log(data);
+                // 登入成功
+                if (data == "200") {
+                    location.href = "/users/users_network_dick/"
+                }
+                ;
+                // 失败
+                if (data == "404") {
+                    alert("请重试.......");
+                }
+            },
+            //调用出错执行的函数
+            error: function () {
+                //请求出错处理
+                console.log("error");
+            }
+        })
+    }
+</script>
+</body>
+</html>
