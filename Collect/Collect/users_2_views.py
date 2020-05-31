@@ -104,7 +104,7 @@ def users_register_API(request):
                         uuid4_str = str(uuid.uuid4()) + "_number"
                         request.session[uuid4_str] = random_num
                         obj = HttpResponse("200")
-                        obj.set_cookie("random_num", uuid4_str, 60 * 60 * 24)
+                        obj.set_cookie("random_num", uuid4_str, 60)
                         logger.warning("function users_register_API - %s - random_num = %s" % (ip,random_num))
                         return obj
                     else:
