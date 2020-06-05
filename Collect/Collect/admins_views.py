@@ -393,7 +393,7 @@ def users_disk_manager(request):
                 search_uses_network_dick_result = manager_sqlx.search(sql, [])
                 if search_uses_network_dick_result == ():
                     logger.warning("function users_disk_manager - %s - search_uses_network_dick_result == ()" % (ip))
-                    return HttpResponse("404")
+                    return HttpResponse("303")
                 elif search_uses_network_dick_result != ():
                     logger.warning("function users_disk_manager - %s - search_uses_network_dick_result != ()" % (ip))
                     for index,row in enumerate(search_uses_network_dick_result):
@@ -417,7 +417,7 @@ def users_disk_manager(request):
                 search_uses_network_dick_result = manager_sqlx.search(sql,[])
                 if search_uses_network_dick_result == ():
                     logger.warning("function users_disk_manager - %s - search_uses_network_dick_result == ()" % (ip))
-                    return HttpResponse("404")
+                    return HttpResponse("303")
                 elif search_uses_network_dick_result != ():
                     logger.warning("function users_disk_manager - %s - search_uses_network_dick_result != ()" % (ip))
                     for index,row in enumerate(search_uses_network_dick_result):
@@ -438,6 +438,9 @@ def users_disk_manager(request):
         except BaseException as e:
             logging.exception('function users_disk_manager  - %s - requests method post - except'%(e), exc_info=True)
             return HttpResponse("404")
+        
+        
+        
 def activity_manager(request):
     '''
 
