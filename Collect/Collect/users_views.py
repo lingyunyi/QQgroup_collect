@@ -340,7 +340,7 @@ def join_activity(request):
                         # ----------------------Get请求可以返回内容的开始---------------------------
                         # ----------------------Get请求可以返回内容的开始---------------------------
 
-                        sql = '''select id,notice_activity_name,notice_activity_type,notice_activity_create_time from alls_notice_activity_list order by id desc limit 8'''
+                        sql = '''select id,notice_activity_name,notice_activity_type,notice_activity_create_time from alls_notice_activity_list where is_delete = 0 order by id desc limit 8'''
                         search_alls_notice_activity_list_result = manager_sqlx.search(sql,[])
                         activity_list = []
                         for row in search_alls_notice_activity_list_result:
