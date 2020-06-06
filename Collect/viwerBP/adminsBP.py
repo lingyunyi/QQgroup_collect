@@ -89,6 +89,7 @@ def activity_manager_add(request):
             active_content = request.POST.get("active_content", None)
             active_type = request.POST.get("active_type", None)
             active_end_time = request.POST.get("active_end_time", None)
+            active_who = request.POST.get("active_who", None)
             #如果为空直接，返回404
             if active_name == None or active_name =="" or active_content == None or active_content =="" or active_type == None or active_type == "":
                 return HttpResponse("404")
@@ -103,7 +104,7 @@ def activity_manager_add(request):
                 active_type,
                 time.strftime('%Y-%m-%d',time.localtime(time.time())),
                 active_end_time,
-                user_name,
+                active_who,
                 0
             ])
             if insert_result == True:
