@@ -78,28 +78,30 @@
             <div class="panel panel-default">
                 <div class="panel-heading">发布活动与公告</div>
                 <div class="panel-body">
-                    <div>
-                        <section>
-                            <div class="form-group">
-                                <label for="active_name">活动或公告标题</label>
-                                <input type="text" class="form-control" id="active_name" name="active_name">
-                            </div>
-                            <div class="form-group">
-                                <label for="active_content">活动或公告内容</label>
-                                <input type="text" class="form-control" id="active_content" name="active_content">
-                            </div>
-                            <label for="active_type">发布类型</label>
-                            <select class="form-group" name="active_type" id="active_type">
-                                <option value="1">活动</option>
-                                <option value="0">公告</option>
-                            </select>
-                            <div class="form-group">
-                                <label for="active_end_time">结束时间:(格式为2020-08-08)</label>
-                                <input type="text" class="form-control" id="active_end_time" name="active_end_time">
-                            </div>
-                            <button type="submit" class="btn btn-default" onclick="return AjaxSend();">发布</button>
-                        </section>
-                    </div>
+                    <section>
+                        <div class="form-group">
+                            <label for="active_name">活动或公告标题</label>
+                            <input type="text" class="form-control" id="active_name" name="active_name">
+                        </div>
+                        <div class="form-group">
+                            <label for="active_content">活动或公告内容</label>
+                            <textarea class="form-control" rows="3" id="active_content" name="active_content"></textarea>
+                        </div>
+                        <label for="active_type">发布类型</label>
+                        <select class="form-group" name="active_type" id="active_type">
+                            <option value="1">活动</option>
+                            <option value="0">公告</option>
+                        </select>
+                        <div class="form-group">
+                            <label for="active_end_time">结束时间:(格式为2020-08-08)</label>
+                            <input type="text" class="form-control" id="active_end_time" name="active_end_time">
+                        </div>
+                        <div class="form-group">
+                            <label for="active_who">发布组织与发布人(某团队 - 联系人 - 联系方式)：</label>
+                            <input type="text" class="form-control" id="active_who" name="active_who">
+                        </div>
+                        <button type="submit" class="btn btn-default" onclick="return AjaxSend();">发布</button>
+                    </section>
                 </div>
             </div>
         </div><!-- /.col-->
@@ -122,10 +124,11 @@
             url: '/admins/activity_manager_add/',
             type: "POST",
             data: {
-                "active_name":$("#active_name").val(),
-                "active_content":$("#active_content").val(),
-                "active_type":$("#active_type").val(),
-                "active_end_time":$("#active_end_time").val(),
+                "active_name": $("#active_name").val(),
+                "active_content": $("#active_content").val(),
+                "active_type": $("#active_type").val(),
+                "active_end_time": $("#active_end_time").val(),
+                "active_who": $("#active_who").val(),
             },
             // 设置超时的时间XXs
             timeout: 30000,
