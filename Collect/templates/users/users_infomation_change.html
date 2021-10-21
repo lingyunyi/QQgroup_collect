@@ -81,12 +81,12 @@
         <P>修改信息</P>
     </h1>
 </header>
-<p><input type="text" class="am-form-field am-round" value="{{user_info_list.2}}" id="my_name" name="my_name" /></p>
-<p><input type="text" class="am-form-field am-round" value="{{user_info_list.3}}" id="my_school" name="my_school"/></p>
-<p><input type="text" class="am-form-field am-round" value="{{user_info_list.4}}" id="my_grade" name="my_grade"/></p>
-<p><input type="text" class="am-form-field am-round" value="{{user_info_list.5}}" id="my_depart" name="my_depart"/></p>
-<p><input type="text" class="am-form-field am-round" value="{{user_info_list.6}}" id="my_trade" name="my_trade"/></p>
-<p><input type="text" class="am-form-field am-round" value="{{user_info_list.7}}" disabled="disabled"/></p>
+<p><input type="text" class="am-form-field am-round" placeholder="姓名：{{user_info_list.2}}" id="my_name" name="my_name"/></p>
+<p><input type="text" class="am-form-field am-round" placeholder="学校：{{user_info_list.3}}" id="my_school" name="my_school"/></p>
+<p><input type="text" class="am-form-field am-round" placeholder="年级：{{user_info_list.4}}" id="my_grade" name="my_grade"/></p>
+<p><input type="text" class="am-form-field am-round" placeholder="系别：{{user_info_list.5}}" id="my_depart" name="my_depart"/></p>
+<p><input type="text" class="am-form-field am-round" placeholder="专业：{{user_info_list.6}}" id="my_trade" name="my_trade"/></p>
+<p><input type="text" class="am-form-field am-round" placeholder="团队：{{user_info_list.7}}" disabled="disabled"/></p>
 <button type="button" class="am-btn am-btn-primary am-round am-btn-block" onclick="return AjaxSend();">提交</button>
 
 <div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default "
@@ -134,7 +134,7 @@
                 "my_school":$("#my_school").val(),
                 "my_grade":$("#my_grade").val(),
                 "my_depart":$("#my_depart").val(),
-                "my_trade":$("#my_trade").val(),
+                "my_trade":$("#my_depart").val(),
             },
             // 设置超时的时间XXs
             timeout: 30000,

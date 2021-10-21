@@ -39,9 +39,6 @@
                     if (data == "404") {
                         location.href = "/admins/login/"
                     }
-                    if (data == "303") {
-                        alert("重试，请刷新页面......");
-                    }
                     if (data != "") {
                         var obj2 = JSON.parse(data);
                         var tab = $("#tbody");
