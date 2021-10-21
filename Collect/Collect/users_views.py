@@ -56,7 +56,7 @@ def download(request):
         except BaseException as e :
             logging.exception('function download  - %s - requests method post - except' % (e), exc_info=True)
             return redirect("/users/users_network_dick/")
-        file = open(r'C:\PythonProject\Collect\Collect\QQclass\%s.cvs'%(filename), 'rb')
+        file = open(r'%s\%s.cvs'%(qqclass_Path,filename), 'rb')
         response = HttpResponse(file)
         file.close()
         response['Content-Type'] = 'application/octet-stream'  # 设置头信息，告诉浏览器这是个文件
@@ -340,7 +340,7 @@ def join_activity(request):
                         # ----------------------Get请求可以返回内容的开始---------------------------
                         # ----------------------Get请求可以返回内容的开始---------------------------
 
-                        sql = '''select id,notice_activity_name,notice_activity_type,notice_activity_create_time from alls_notice_activity_list where is_delete = 0 order by id desc limit 8'''
+                        sql = '''select id,notice_activity_name,notice_activity_type,notice_activity_create_time from alls_notice_activity_list order by id desc limit 8'''
                         search_alls_notice_activity_list_result = manager_sqlx.search(sql,[])
                         activity_list = []
                         for row in search_alls_notice_activity_list_result:

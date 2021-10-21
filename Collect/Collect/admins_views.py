@@ -3,7 +3,7 @@ from django.http import request
 from django.shortcuts import redirect,render,HttpResponse,Http404
 import threading,requests
 import uuid,time,os
-from .settings import *
+from Collect.settings import *
 import logging,hashlib,json
 
 manager_sqlx = manager_sql.SqlManger()
@@ -68,7 +68,7 @@ def download(request):
         # -----------------执行验证------------------
         # -----------------执行验证------------------
         filename = request.GET["file"]
-        file = open(r'C:\PythonProject\Collect\Collect\QQclass\%s.cvs'%(filename), 'rb')
+        file = open(r'%s\%s.cvs'%(qqclass_Path,filename), 'rb')
         response = HttpResponse(file)
         file.close()
         response['Content-Type'] = 'application/octet-stream'  # 设置头信息，告诉浏览器这是个文件
@@ -393,7 +393,7 @@ def users_disk_manager(request):
                 search_uses_network_dick_result = manager_sqlx.search(sql, [])
                 if search_uses_network_dick_result == ():
                     logger.warning("function users_disk_manager - %s - search_uses_network_dick_result == ()" % (ip))
-                    return HttpResponse("303")
+                    return HttpResponse("404")
                 elif search_uses_network_dick_result != ():
                     logger.warning("function users_disk_manager - %s - search_uses_network_dick_result != ()" % (ip))
                     for index,row in enumerate(search_uses_network_dick_result):
@@ -417,7 +417,7 @@ def users_disk_manager(request):
                 search_uses_network_dick_result = manager_sqlx.search(sql,[])
                 if search_uses_network_dick_result == ():
                     logger.warning("function users_disk_manager - %s - search_uses_network_dick_result == ()" % (ip))
-                    return HttpResponse("303")
+                    return HttpResponse("404")
                 elif search_uses_network_dick_result != ():
                     logger.warning("function users_disk_manager - %s - search_uses_network_dick_result != ()" % (ip))
                     for index,row in enumerate(search_uses_network_dick_result):
@@ -438,9 +438,6 @@ def users_disk_manager(request):
         except BaseException as e:
             logging.exception('function users_disk_manager  - %s - requests method post - except'%(e), exc_info=True)
             return HttpResponse("404")
-        
-        
-        
 def activity_manager(request):
     '''
 

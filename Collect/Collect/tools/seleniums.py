@@ -8,8 +8,8 @@ import time
 import json
 import csv
 import uuid,os
-from ..settings import *
-from ..tools import manager_sql
+from Collect.settings import *
+from Collect.tools import manager_sql
 import logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s  - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -64,7 +64,7 @@ class Seleniums(object):
         url = 'https://qun.qq.com/'
         # 构建谷歌驱动器
         #部署环境 需要放到自己的目录，不然没有权限访问
-        browser = webdriver.Firefox(executable_path='C:\\PythonProject\\Collect\\Collect\\tools\\geckodriver')
+        browser = webdriver.Firefox(executable_path=selenuim_Exe)
 
 
         #browser = webdriver.Firefox()
@@ -140,19 +140,19 @@ class Seleniums(object):
         # 登陆成功之后，我们就找到群管理的标签并点击,首先等待这个元素加载完成
         WebDriverWait(browser, 1000).until(
             EC.presence_of_all_elements_located(
-                (By.XPATH, './/ul[@id="headerNav"]/li[4]')
+                (By.XPATH, '/html/body/div[1]/div/div/ul/li[3]')
             )
         )
-        print("\n-----def switch_spider-----WebDriverWait-----begin-----")
-        browser.find_element_by_xpath('.//ul[@id="headerNav"]/li[4]').click()
+        print("\n-----def switch_spider-----WebDriverWait-----begin-----群管理(点击)")
+        browser.find_element_by_xpath('/html/body/div[1]/div/div/ul/li[3]').click()
         # 点击之后，我们找到成员管理标签并点击
         WebDriverWait(browser, 1000).until(
             EC.presence_of_all_elements_located(
-                (By.CLASS_NAME, 'color-tit')
+                (By.XPATH, '/html/body/div[3]/ul/li[1]')
             )
         )
-        print("\n-----def switch_spider-----(By.CLASS_NAME, 'color-tit')-----begin-----")
-        browser.find_element_by_class_name('color-tit').click()
+        print("\n-----def switch_spider-----(By.CLASS_NAME, '群成员点击')-----begin-----")
+        browser.find_element_by_xpath('/html/body/div[3]/ul/li[1]').click()
         # 打印全部窗口句柄
         # print(browser.window_handles)
         # 打印当前窗口句柄
@@ -354,7 +354,7 @@ class Seleniums(object):
                 self.add_list.append(qun_id)
                 print("\n-----def start_spider-----(open(%(BASE_DIR,path2))-----writer cvs is begin-----")
                 print("\n-----def start_spider-----(open(%(BASE_DIR,path2))-----writer cvs is begin2-----")
-                with open(r"C:\PythonProject\Collect\Collect\QQclass\%s.cvs"%(qun_id), 'w', encoding='utf-8-sig', newline='') as f:
+                with open(r"%s/%s.cvs"%(qqclass_Path,qun_id), 'w', encoding='utf-8-sig', newline='') as f:
                     try:
                         # 表头
                         print("\n-----def start_spider-----(open(%(BASE_DIR,path2))-----writer cvs is error11-----")
@@ -399,6 +399,8 @@ class Seleniums(object):
 
             except Exception as e:
                 print("\n-----def start_spider-----(except Exception as e)-----while true false-----",e)
+                if "refreshed" in str(e):
+                    browser.refresh()
                 continue
 
 

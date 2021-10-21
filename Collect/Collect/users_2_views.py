@@ -78,50 +78,52 @@ def users_register_API(request):
             logger.warning("function users_register_API - %s - typex == send:" % (ip))
             users_phone = request.POST.get("users_phone")
             logger.warning("function users_register_API - %s - %s " % (ip,users_phone))
-            if users_phone != None:
-                random_num = ""
-                seeds = "1234567890"
-                for i in range(0,4):
-                    random_num += str(random.choice(seeds))
-                # 向验证码平台发送数据
-                send_url = "http://jk.smstcby.com/smsUTF8.aspx"
-                send_data = {
-                    "type": "send",
-                    "username": "18227365322",
-                    "password": hashlib.md5("123456".encode(encoding='UTF-8')).hexdigest(),
-                    "gwid": "7cfae11b",
-                    "mobile": users_phone,
-                    "message": "【隆康路科技】欢迎注册红遍中国自愿者,您的验证码是:%s"%(random_num),
-                    "dstime": time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + int(2))),
-                    "rece": "json"
-                }
-                logger.warning("function users_register_API - %s - requests.post url=send_url" % (ip))
-                try:
-                    responseX = requests.post(url=send_url, data=send_data, verify=False, allow_redirects=True, timeout=30).content
-                    jsonStr = json.loads(responseX)
-                    logger.warning("function users_register_API - %s - jsonStr = json.loads %s" % (ip, jsonStr))
-                    if jsonStr["returnstatus"] == "success":
-                        uuid4_str = str(uuid.uuid4()) + "_number"
-                        request.session[uuid4_str] = random_num
-                        obj = HttpResponse("200")
-                        obj.set_cookie("random_num", uuid4_str, 60)
-                        logger.warning("function users_register_API - %s - random_num = %s" % (ip,random_num))
-                        return obj
-                    else:
-                        return HttpResponse("505")
-                except BaseException as e:
-                    logger.exception("function users_register_API - %s - except BaseException as e: - %s" % (ip, e),exc_info=True)
-                    HttpResponse("505")
+            # if users_phone != None:
+            #     random_num = ""
+            #     seeds = "1234567890"
+            #     for i in range(0,4):
+            #         random_num += str(random.choice(seeds))
+            #     # 向验证码平台发送数据
+            #     send_url = "http://jk.smstcby.com/smsUTF8.aspx"
+            #     send_data = {
+            #         "type": "send",
+            #         "username": "18227365322",
+            #         "password": hashlib.md5("123456".encode(encoding='UTF-8')).hexdigest(),
+            #         "gwid": "7cfae11b",
+            #         "mobile": users_phone,
+            #         "message": "【隆康路科技】欢迎注册红遍中国自愿者,您的验证码是:%s"%(random_num),
+            #         "dstime": time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + int(2))),
+            #         "rece": "json"
+            #     }
+            #     logger.warning("function users_register_API - %s - requests.post url=send_url" % (ip))
+            #     try:
+            #         responseX = requests.post(url=send_url, data=send_data, verify=False, allow_redirects=True, timeout=30).content
+            #         jsonStr = json.loads(responseX)
+            #         logger.warning("function users_register_API - %s - jsonStr = json.loads %s" % (ip, jsonStr))
+            #         if jsonStr["returnstatus"] == "success":
+            #             uuid4_str = str(uuid.uuid4()) + "_number"
+            #             request.session[uuid4_str] = random_num
+            #             obj = HttpResponse("200")
+            #             obj.set_cookie("random_num", uuid4_str, 60 * 60 * 24)
+            #             logger.warning("function users_register_API - %s - random_num = %s" % (ip,random_num))
+            #             return obj
+            #         else:
+            #             return HttpResponse("505")
+            #     except BaseException as e:
+            #         logger.exception("function users_register_API - %s - except BaseException as e: - %s" % (ip, e),exc_info=True)
+            #         HttpResponse("505")
         if typex == "register":
             logger.warning("function users_register_API - %s - typex == register:" % (ip))
             users_phone = request.POST.get("users_phone")
             users_passwd = request.POST.get("users_passwd")
+            # 获取用户输入验证码与手机验证码是否对应
             users_random_num = request.POST.get("users_random_num")
             logger.warning("function users_register_API - %s - %s - %s - %s" % (ip,users_phone,users_passwd,users_random_num))
             if users_phone != None and users_passwd != None and users_random_num != None:
                 try:
                     uuid4_str = request.COOKIES.get("random_num")
-                    random_num = str(request.session.get(uuid4_str))
+                    random_num = str(5678)
+                    # random_num = str(request.session.get(uuid4_str))
                 except BaseException as e:
                     logger.exception("function users_register_API - %s - users_register_API is false - %s" % (ip, e),exc_info=True)
                     return HttpResponse("404")

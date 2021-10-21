@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
+qqclass_Path = r"C:\Users\Administrator\Desktop\Collect\Collect\QQclass"
+selenuim_Exe = r"C:\Users\Administrator\Desktop\Collect\Collect/tools/geckodriver"
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 print(BASE_DIR)
