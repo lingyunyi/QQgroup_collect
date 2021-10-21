@@ -1,3 +1,12 @@
+
+
+
+
+
+
+
+
+
 def activity_manager_add(request):
     '''
 
