@@ -105,7 +105,7 @@ class Seleniums(object):
                     '''为了报错而存在冗余代码，下次优化'''
             except BaseException as e:
                 print("\n-----def login_spider-----browser.find_element_by_xpath   no is login-----except BaseException as e:-----",e)
-                time.sleep(25)
+                time.sleep(22)
                 continue
         try:
             if browser.find_element_by_xpath("/html/body/div[1]/div/div/div/p[1]/a[2]"):
@@ -400,7 +400,9 @@ class Seleniums(object):
             except Exception as e:
                 print("\n-----def start_spider-----(except Exception as e)-----while true false-----",e)
                 if "refreshed" in str(e):
+                    print("\n，#############>>>   Web_loading_false_so_refresh_web_need_sleep_6s", e)
                     browser.refresh()
+                    time.sleep(6)
                 continue
 
 
