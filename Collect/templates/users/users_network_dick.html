@@ -121,13 +121,16 @@
                                 <thead>
                                 <tr>
                                     <th>
+                                        <CENTER>时间</CENTER>
+                                    </th>
+                                    <th>
                                         <CENTER>群号</CENTER>
                                     </th>
                                     <th>
-                                        <CENTER>群名称</CENTER>
+                                        <CENTER>群名</CENTER>
                                     </th>
                                     <th>
-                                        <CENTER>群人数</CENTER>
+                                        <CENTER>人数</CENTER>
                                     </th>
                                     <th>
                                         <CENTER>操作</CENTER>
@@ -137,6 +140,9 @@
                                 <tbody>
                                 {% for row in all_uses_network_list %}
                                     <tr>
+                                        <td>
+                                            <center>{{ row.7 }}</center>
+                                        </td>
                                         <td>
                                             <center>{{ row.2 }}</center>
                                         </td>
@@ -167,8 +173,9 @@
             <table class="am-table">
                 <thead>
                 <tr>
+                    <th style="text-align: center;">时间</th>
                     <th style="text-align: center;">群号</th>
-                    <th style="text-align: center;">群名称</th>
+                    <th style="text-align: center;">群名</th>
                     <th style="text-align: center;">人数</th>
                     <th style="text-align: center;">操作</th>
                 </tr>
@@ -176,6 +183,9 @@
                 <tbody>
                 {% for row in like_uses_network_list %}
                     <tr>
+                        <td>
+                            <center>{{ row.7 }}</center>
+                        </td>
                         <td>
                             <center>{{ row.2 }}</center>
                         </td>
