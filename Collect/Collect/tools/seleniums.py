@@ -382,8 +382,8 @@ class Seleniums(object):
                 # --------------------------------------------------------------------------------------------------------
                 # ------------------------------------------------这里得更新数据库--------------------------------------------------------
                 try:
-                    sql = '''insert into users_network_dick values (%s,%s,%s,%s,%s,%s,%s) '''
-                    self.manager_sqlx.excute(sql,[None,qun_name,qun_id,self.user_name,0,groupMemberNum,0])
+                    sql = '''insert into users_network_dick values (%s,%s,%s,%s,%s,%s,%s,%s) '''
+                    self.manager_sqlx.excute(sql,[None,qun_name,qun_id,self.user_name,0,groupMemberNum,0,time.strftime("%Y-%m-%d %H:%M", time.localtime())])
                 except BaseException as e:
                     print("----------**************************--------------",e)
                 # -----------------------------------------------------这里得更新数据库---------------------------------------------------

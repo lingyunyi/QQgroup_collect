@@ -397,7 +397,6 @@ def users_disk_manager(request):
                 elif search_uses_network_dick_result != ():
                     logger.warning("function users_disk_manager - %s - search_uses_network_dick_result != ()" % (ip))
                     for index,row in enumerate(search_uses_network_dick_result):
-                        id = row[0]
                         qqclass_name = row[1]
                         qqclass_number = row[2]
                         qqclass_from_user_account = row[3]
@@ -406,10 +405,12 @@ def users_disk_manager(request):
                         elif row[4] == 1:
                             user_is_like = "like"
                         download_location = row[5]
-                        if str(search_content) in (str(id)  + str(qqclass_name)  + str(qqclass_number)  + str(qqclass_from_user_account)) or str(search_content) == user_is_like:
-                            return_uses_network_dict[index] = [id,qqclass_name,qqclass_number,qqclass_from_user_account,user_is_like,download_location]
-
-                    return_jsonDB = json.dumps(return_uses_network_dict,ensure_ascii=False)
+                        oo = "A"+str(index)+"B"
+                        insert_time = row[7]
+                        if str(search_content) in (str(qqclass_name)  + str(qqclass_number)  + str(qqclass_from_user_account)) or str(search_content) == user_is_like:
+                            return_uses_network_dict[oo] = [index,qqclass_name,qqclass_number,qqclass_from_user_account,user_is_like,download_location,insert_time]
+                    sort_dict = dict(sorted(return_uses_network_dict.items(), key=lambda x:x[1][0], reverse=True))
+                    return_jsonDB = json.dumps(sort_dict,ensure_ascii=False)
                     return HttpResponse(return_jsonDB)
             elif search_content == "":
                 logger.warning("function users_disk_manager - %s - sarch_content == None" % (ip))
@@ -431,7 +432,8 @@ def users_disk_manager(request):
                             user_is_like = "like"
                         download_location = row[5]
                         oo = "A"+str(index)+"B"
-                        return_uses_network_dict[oo] = [index,qqclass_name,qqclass_number,qqclass_from_user_account,user_is_like,download_location]
+                        insert_time = row[7]
+                        return_uses_network_dict[oo] = [index,qqclass_name,qqclass_number,qqclass_from_user_account,user_is_like,download_location,insert_time]
                     sort_dict = dict(sorted(return_uses_network_dict.items(), key=lambda x:x[1][0], reverse=True))
                     # 将return_uses_network_dict 按照倒叙进行返回
                     return_jsonDB = json.dumps(sort_dict,ensure_ascii=False)
