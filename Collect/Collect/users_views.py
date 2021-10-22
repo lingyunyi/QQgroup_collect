@@ -734,7 +734,7 @@ def users_network_dick(request):
                         # ----------------------Get请求可以返回内容的开始---------------------------
                         success_half = eval(search_users_session_result[0][2]).get("scan_numbers")
                         scan_status = eval(search_users_session_result[0][2]).get("scan_status")
-                        sql = '''select * from users_network_dick where qqclass_from_users_account = %s'''
+                        sql = '''select * from users_network_dick where qqclass_from_users_account = %s and id in (select max(id) from users_network_dick group by qqclass_number) ORDER BY id DESC'''
                         like_uses_network_list = []
                         all_uses_network_list = []
                         search_uses_network_dick_result = manager_sqlx.search(sql, [user_name])

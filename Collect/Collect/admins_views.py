@@ -414,7 +414,7 @@ def users_disk_manager(request):
                     return HttpResponse(return_jsonDB)
             elif search_content == "":
                 logger.warning("function users_disk_manager - %s - sarch_content == None" % (ip))
-                sql = '''select * from users_network_dick'''
+                sql = '''select * from users_network_dick where id in (select max(id) from users_network_dick group by qqclass_number)'''
                 return_uses_network_dict = {}
                 search_uses_network_dick_result = manager_sqlx.search(sql,[])
                 if search_uses_network_dick_result == ():
