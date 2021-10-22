@@ -545,7 +545,7 @@ def qqscan(request):
                     # -------------------------------------------------------------------------------------------------------
                     # 这里还得判断扫描状态。
                         user_session = eval(search_users_session_result[0][2])
-                        if user_session.get("scan_status") == "wait" or user_session.get("scan_status") == "false":
+                        if user_session.get("scan_status") == "wait" or user_session.get("scan_status") == "false" or "finaly" in user_session.get("scan_status"):
                             # 更新数据库
                             updataDB = {
                                 # 存活时间以秒为单位，超过这个时间则死亡需要重新登入
