@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
+users_disk_manager_choose_list = None
+
 qqclass_Path = r"C:\Users\Administrator\Desktop\Collect\Collect\QQclass"
 selenuim_Exe = r"C:\Users\Administrator\Desktop\Collect\Collect/tools/geckodriver"
 

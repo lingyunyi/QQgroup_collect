@@ -1,5 +1,5 @@
 import pymysql
-
+from DBUtils.PooledDB import PooledDB
 
 class SqlManger(object):
 
@@ -7,6 +7,7 @@ class SqlManger(object):
         '''
             暂无初始化内容
         '''
+        self.pool = PooledDB(pymysql, 5, host="127.0.0.1", user="root", password="root", database="collect",port=3306)  # 5为连接池里的最少连接数
         pass
 
     def connect(self):
@@ -14,10 +15,15 @@ class SqlManger(object):
             # connent(参数列表[“IP地址”，“数据库账号”， “数据库密码”， “数据库名称”])
         :return:
         '''
-        self.db = pymysql.connect("127.0.0.1", "root", "root", "collect")
-        # 使用cursor游标，创建一个游标对象cursor
-        self.cursor = self.db.cursor()
-        return True
+        try:
+
+            self.db = self.pool.connection()
+            # 使用cursor游标，创建一个游标对象cursor
+            self.cursor = self.db.cursor()
+            return True
+        except BaseException as e:
+            print("connect",e)
+
 
     def close(self):
         '''
@@ -29,32 +35,50 @@ class SqlManger(object):
         self.db.close()
         return True
 
-    def search(self,sql,args = None,show=True):
+    def search(self, sql, args=None, show=True):
         try:
             # 连接服务器
             self.connect()
             # 执行SQL语句
             if show != False:
-                print(sql, args)
+                print("-"*20,sql, args,"-"*20)
             # sql语句需要接占位符,由于不使用dict传参数,所以只需要%s 用[]或者()传递参数即可.如果需要使用dict 占位符这需要,%(key)s为占位符.
-            self.cursor.execute(sql,args)
+            self.cursor.execute(sql, args)
             # 获取数据库中的表单
             results = self.cursor.fetchall()
             self.close()
             # 直接返回查询结果，返回的结果是一个元祖
             return results
-        except:
+        except BaseException as e:
+            print(e)
             # 如果发生错误则回滚
             self.close()
             return False
 
-    def excute(self, sql,args = None,show=True):
+    def excutemany(self, sql, args=None, show=True):
         try:
             # 连接数据库
             self.connect()
             # 执行sql语句
             if show != False:
-                print(sql, args)
+                print("-"*20,sql, args,"-"*20)
+            self.cursor.executemany(sql, args)
+            # 提交到数据库执行
+            self.db.commit()
+            # 关闭数据库
+            self.close()
+            return True
+        except:
+            self.db.rollback()
+            return False
+
+    def excute(self, sql, args=None, show=True):
+        try:
+            # 连接数据库
+            self.connect()
+            # 执行sql语句
+            if show != False:
+                print("-"*20,sql, args,"-"*20)
             self.cursor.execute(sql,args)
             # 提交到数据库执行
             self.db.commit()
