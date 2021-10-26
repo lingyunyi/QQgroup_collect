@@ -13,14 +13,11 @@
     <script src="js/respond.min.js"></script>
     <![endif]-->
     <script>
-        function AjaxSend() {
-            var X = $("#search").val()
-            console.log(X)
-            if (X == null) {
-                var content = "search_all"
-            } else {
-                var content = $("#search").val()
-            }
+        function AjaxSend(init_str) {
+            var content = $("#search").val()
+            if (content == "" && init_str == "x"){return false}
+            if (content == "") {content = "fall"}
+            console.log(content,init_str)
             $.ajax({
                 url: '/admins/users_disk_manager/',
                 type: "POST",
@@ -28,16 +25,15 @@
                     "search_content": content
                 },
                 // 设置超时的时间XXs
-                timeout: 30000,
+                timeout: 300000,
                 success: function (data) {
                     //当服务端处理完成后，返回数据时，该函数自动调用
                     // data代表服务器给我们返回的值
                     // 可以使用 JavaScript进行html的内容修改展示内容，或者刷新界面
-                    console.log(data);
                     // 登入成功
                     // 失败
                     if (data == "404") {
-                        location.href = "/admins/login/"
+                        console.log("请等待.")
                     }
                     if (data != "") {
                         var obj2 = JSON.parse(data);
@@ -64,6 +60,7 @@
                 }
             })
         };
+        AjaxSend('o');
     </script>
 
 </head>
@@ -131,7 +128,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search" id="search" oninput="AjaxSend();">
+                        <input type="text" class="form-control" placeholder="Search" id="search" oninput="AjaxSend('x');">
                     </div>
                 </div>
                 <div class="panel-body">
